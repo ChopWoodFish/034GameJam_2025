@@ -37,9 +37,10 @@ public class ShapeGenerator : MonoBehaviour
             {
                 int genType = Random.Range(0, listShapeDebrisPrefab.Count);
                 int genColorIndex = Random.Range(0, listGenColor.Count);
-                ShapeDebris shapeDebris = Instantiate(listShapeDebrisPrefab[genType],  genPos,
+                ShapeDebris shapeDebris = Instantiate(listShapeDebrisPrefab[genType],  
+                    genPos + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f)),
                     Quaternion.Euler(0, 0, Random.Range(0f, 360f)) , debrisParent);
-                var randomForce = new Vector2(Random.Range(1f, 5f), Random.Range(1f, 5f));
+                var randomForce = new Vector2(Random.Range(15f, 30f), Random.Range(15f, 30f));
                 if (Random.Range(0, 1f) < 0.5f)
                 {
                     randomForce.x *= -1;
