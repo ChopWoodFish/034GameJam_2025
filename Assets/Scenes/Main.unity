@@ -335,6 +335,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &780952131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 780952132}
+  m_Layer: 0
+  m_Name: NodeDebris
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &780952132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780952131}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &882055046
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,6 +703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd9e3d8ac76a46fb85615ddaf6be6e61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shapeManager: {fileID: 1791645728}
 --- !u!4 &1349779369
 Transform:
   m_ObjectHideFlags: 0
@@ -795,6 +827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf57fa1a797e4d8db8f412db586b5c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shapeGenerator: {fileID: 2091826194}
 --- !u!4 &1791645729
 Transform:
   m_ObjectHideFlags: 0
@@ -921,6 +954,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7243114889527395526, guid: d49cc429f976d438f904ab5b82db5f97, type: 3}
   m_PrefabInstance: {fileID: 6098034362571325651}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2091826194 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5542502990214582482, guid: 48ccbcb5a4f41453faab68fef2a91f60, type: 3}
+  m_PrefabInstance: {fileID: 4850573647614856399}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05f02ecd2295a4e7295e8bb23f9925b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2113417771
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,13 +1048,13 @@ PrefabInstance:
       propertyPath: shapeParent
       value: 
       objectReference: {fileID: 1834939984}
+    - target: {fileID: 5542502990214582482, guid: 48ccbcb5a4f41453faab68fef2a91f60, type: 3}
+      propertyPath: debrisParent
+      value: 
+      objectReference: {fileID: 1834939984}
     - target: {fileID: 5560980909327527722, guid: 48ccbcb5a4f41453faab68fef2a91f60, type: 3}
       propertyPath: m_Name
       value: ShapeGenerator
-      objectReference: {fileID: 0}
-    - target: {fileID: 5560980909327527722, guid: 48ccbcb5a4f41453faab68fef2a91f60, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1157,5 +1201,6 @@ SceneRoots:
   - {fileID: 2113417772}
   - {fileID: 4850573647614856399}
   - {fileID: 1834939984}
+  - {fileID: 780952132}
   - {fileID: 48337457}
   - {fileID: 998199157}

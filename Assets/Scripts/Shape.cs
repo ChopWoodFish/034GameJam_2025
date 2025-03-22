@@ -1,39 +1,69 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Util;
 using Random = UnityEngine.Random;
 
 public class Shape : MonoBehaviour, IPointerClickHandler
 {
+    public int Type => type;
+    
+    [SerializeField] private int type;
     [SerializeField] private List<Color> listColor = new List<Color>();
     
     [SerializeField] private SpriteRenderer srShape;
     [SerializeField] private Rigidbody2D rigidBody2D;
-    [SerializeField] private Collider2D shapeCollider2D;
     [SerializeField] private Animator animator;
+
+    private AnimationEventHelper _animHelper;
+    private Collider2D _shapeCollider2D;
     
+    
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        IntEventSystem.Send(GameEventEnum.ClickShape, this);
+    }
     
     private void Awake()
     {
+        _animHelper = GetComponent<AnimationEventHelper>();
+        if (_animHelper != null)
+        {
+            _animHelper.OnAnim = OnAnim;
+        }
+        _shapeCollider2D = GetComponent<Collider2D>();
+
         int colorIndex = Random.Range(0, listColor.Count);
         srShape.color = listColor[colorIndex];
     }
 
-    private void Start()
+    public void DoBug()
     {
-        // ShowFloating();
+        // if (type == 0)
+        // {
+            IntEventSystem.Send(GameEventEnum.GenerateShapeDebris, this);
+        // }
     }
 
-    private void ShowFloating()
+    public void AddForce(Vector2 force)
     {
-        rigidBody2D.isKinematic = true;
-        shapeCollider2D.enabled = false;
+        rigidBody2D.AddForce(force, ForceMode2D.Impulse);
+    }
+
+    public void ShowFloating()
+    {
+        rigidBody2D.isKinematic = true;  // 会导致点击失效
+        // _shapeCollider2D.enabled = false;
+        // rigidBody2D.gravityScale = 0;
+        
         animator.Play("Show");
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    private void OnAnim(string animEventName)
     {
-        Debug.Log($"click {gameObject.name}");
+        if (animEventName == "End")
+        {
+            IntEventSystem.Send(GameEventEnum.RecycleShape, this);
+        }
     }
 }

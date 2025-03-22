@@ -29,6 +29,10 @@ PrefabInstance:
       value: 0.60784316
       objectReference: {fileID: 0}
     - target: {fileID: 7312652887319189539, guid: 61498ce7350474b54a35c544a49b7c71, type: 3}
+      propertyPath: type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7312652887319189539, guid: 61498ce7350474b54a35c544a49b7c71, type: 3}
       propertyPath: collider2D
       value: 
       objectReference: {fileID: 4167973410782215068}

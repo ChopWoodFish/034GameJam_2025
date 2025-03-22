@@ -10,6 +10,9 @@ namespace Util
         // ...
         GenerateShape = 1,
         ShowBeatTip = 2,
+        ClickShape = 3,
+        RecycleShape = 4,
+        GenerateShapeDebris = 5,
     }
 
     public static class IntEventSystem

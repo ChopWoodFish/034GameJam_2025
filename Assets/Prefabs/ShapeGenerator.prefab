@@ -49,3 +49,8 @@ MonoBehaviour:
   - {fileID: 15406780593574633, guid: e39a25080386a4b689c3e5aca1fc9951, type: 3}
   - {fileID: 5030854196980998585, guid: 0f6f53b975ca2443ebb5a5119e8898d2, type: 3}
   shapeParent: {fileID: 0}
+  listShapeDebrisPrefab:
+  - {fileID: 7998000718653240650, guid: 62c34c771f2f1407da80110ef5ca419a, type: 3}
+  - {fileID: 4936742621517556290, guid: ec8c82b128bc74e14ba06b8801092281, type: 3}
+  - {fileID: 4958097118893466678, guid: f5a0a035f002648328ffb827dd7041ec, type: 3}
+  debrisParent: {fileID: 0}

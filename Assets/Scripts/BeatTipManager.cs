@@ -33,6 +33,5 @@ public class BeatTipManager : MonoBehaviour
             beatTipBox.gameObject.SetActive(true);
         }
         beatTipBoxAnimator.Play("Beat", 0, 0);
-        Debug.Log("beat");
     }
 }
