@@ -41,6 +41,16 @@ namespace Util
             dictToAddEventSchedule[action].Add(schedule);
         }
 
+        public void ScheduleActionAndExecuteImmediately(Action action, float waitTime, int actTime)
+        {
+            if (actTime > 1)
+            {
+                ScheduleAction(action, waitTime, actTime - 1);
+            }
+
+            action.Invoke();
+        }
+
         public void DelayAction(Action action, float delayTime)
         {
             ScheduleAction(action, delayTime, 1);

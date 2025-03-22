@@ -9,7 +9,7 @@ namespace Util
         // Event1 = 1,
         // ...
         GenerateShape = 1,
-        
+        ShowBeatTip = 2,
     }
 
     public static class IntEventSystem

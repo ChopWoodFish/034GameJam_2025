@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4368115537140309692}
   - component: {fileID: 8866732421440279017}
   - component: {fileID: 7312652887319189539}
+  - component: {fileID: 8551641180661930218}
   m_Layer: 0
   m_Name: Shape_1
   m_TagString: Untagged
@@ -166,3 +167,27 @@ MonoBehaviour:
   - {r: 0.60784316, g: 0.4862745, b: 0.7764706, a: 1}
   - {r: 0.23137255, g: 0.7647059, b: 0.54509807, a: 1}
   srShape: {fileID: 6645770338647279423}
+  rigidBody2D: {fileID: 4368115537140309692}
+  collider2D: {fileID: 8866732421440279017}
+  animator: {fileID: 8551641180661930218}
+--- !u!95 &8551641180661930218
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2773421221540232524}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8033d790b607a493cb6309bf9fab0c0d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
