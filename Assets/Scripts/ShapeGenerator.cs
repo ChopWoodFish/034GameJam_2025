@@ -4,7 +4,8 @@ using Util;
 
 public class ShapeGenerator : MonoBehaviour
 {
-    [SerializeField] private List<Shape> _listShapePrefab;
+    [SerializeField] private List<Shape> listShapePrefab;
+    [SerializeField] private Transform shapeParent;
     private UpdateComp _updateComp;
 
     private void Awake()
@@ -24,9 +25,9 @@ public class ShapeGenerator : MonoBehaviour
 
     private void GenerateOneShape()
     {
-        int genType = Random.Range(0, _listShapePrefab.Count);
+        int genType = Random.Range(0, listShapePrefab.Count);
         Vector2 genPos = new Vector2(Random.Range(-15f, 15f), Random.Range(0f, 5f));
-        Shape newShape = Instantiate(_listShapePrefab[genType],  genPos, Quaternion.identity);
+        Shape newShape = Instantiate(listShapePrefab[genType],  genPos, Quaternion.identity, shapeParent);
         IntEventSystem.Send(GameEventEnum.GenerateShape, newShape);
     }
 }
