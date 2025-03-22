@@ -18,8 +18,7 @@ public class GameManager : MonoBehaviour
 
     private float beatTipTotalTime;
     private float generateShapeTotalTime;
-    
-    
+
 
     private void Awake()
     {
@@ -63,12 +62,16 @@ public class GameManager : MonoBehaviour
     
     private void UpdateOneRoundTime()
     {
-        beatTipTotalTime = currentShapeType + 1f;
+        float delay1 = SO.GetDataSettings().BeatStateDelay;
+        
+        beatTipTotalTime = currentShapeType + delay1;
         
         float dur = SO.GetDataSettings().GenerateShapeDuration;
         int count = SO.GetDataSettings().GenerateShapeCount;
         float fadeDur = SO.GetDataSettings().ShapeFadeDuration;
-        generateShapeTotalTime = dur * (count - 1) + fadeDur;
+        float delay2 = SO.GetDataSettings().GenerateStateDelay;
+        generateShapeTotalTime = dur * (count - 1) + fadeDur + delay2;
+        Debug.Log($"One Round Time: {beatTipTotalTime}, {generateShapeTotalTime}");
     }
 
     private void ShowBeatTipState()
