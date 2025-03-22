@@ -4,6 +4,8 @@ using Util;
 
 public class ShapeGenerator : MonoBehaviour
 {
+    public int DebrisCount => debrisParent.childCount;
+    
     [SerializeField] private List<Shape> listShapePrefab;
     [SerializeField] private Transform shapeParent;
     [SerializeField] private List<ShapeDebris> listShapeDebrisPrefab;
@@ -31,9 +33,11 @@ public class ShapeGenerator : MonoBehaviour
     {
         if (param is Shape shape)
         {
+            int minCount = GameManager.Instance.SO.GetDataSettings().MinGenerateDebrisCount;
+            int maxCount = GameManager.Instance.SO.GetDataSettings().MaxGenerateDebrisCount;
             var listGenColor = GameManager.Instance.SO.GetDataSettings().listDebrisColor;
             var genPos = shape.transform.position;
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < Random.Range(minCount, maxCount + 1); i++)
             {
                 int genType = Random.Range(0, listShapeDebrisPrefab.Count);
                 int genColorIndex = Random.Range(0, listGenColor.Count);

@@ -6,6 +6,11 @@ public class ShapeDebris : MonoBehaviour
     [SerializeField] private Rigidbody2D rigidBody2D;
     
     
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
+    
     public void SetColor(Color color)
     {
         srShape.color = color;

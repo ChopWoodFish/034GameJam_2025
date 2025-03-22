@@ -13,4 +13,8 @@ public class DataSettings : ScriptableObject
     public float ShapeFadeDuration = 2f;
     public float GenerateStateDelay = 0.5f;
 
+    public int MinGenerateDebrisCount = 8;
+    public int MaxGenerateDebrisCount = 12;
+    public int MaxDebrisCount = 50;
+
 }

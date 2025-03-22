@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public ScriptableObjectManager SO => _soManager;
 
     [SerializeField] private ShapeManager shapeManager;
+    [SerializeField] private Transform bottomWallTransform;
     
     private UpdateComp _updateComp;
     private int currentShapeType;
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour
         
         ShowBeatTipState();
         _updateComp.DelayAction(GenerateShapeState, beatTipTotalTime);
-        _updateComp.DelayAction(Test, beatTipTotalTime + generateShapeTotalTime);
+        _updateComp.DelayAction(FinishOneRound, beatTipTotalTime + generateShapeTotalTime);
     }
     
     private void UpdateOneRoundTime()
@@ -90,8 +91,23 @@ public class GameManager : MonoBehaviour
         }, dur, count);
     }
 
-    private void Test()
+    private void FinishOneRound()
     {
-        StartOneRound();
+        if (shapeManager.DebrisCount > SO.GetDataSettings().MaxDebrisCount)
+        {
+            Debug.Log("Game Over!");
+            bottomWallTransform.gameObject.SetActive(false);
+            _updateComp.DelayAction(RestartGame, 3f);
+        }
+        else
+        {
+            StartOneRound();
+        }
+    }
+
+    private void RestartGame()
+    {
+        bottomWallTransform.gameObject.SetActive(true);
+        StartGame();
     }
 }

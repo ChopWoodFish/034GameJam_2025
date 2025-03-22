@@ -4,10 +4,13 @@ using Util;
 
 public class ShapeManager : MonoBehaviour
 {
+    public int DebrisCount => _shapeGenerator.DebrisCount;
+    
     [SerializeField] private ShapeGenerator _shapeGenerator;
     
     private List<Shape> listShape = new List<Shape>();
-
+    
+    
     private void Start()
     {
         IntEventSystem.Register(GameEventEnum.ClickShape, OnClickShape);

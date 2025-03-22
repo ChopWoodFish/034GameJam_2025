@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -35,6 +36,11 @@ public class Shape : MonoBehaviour, IPointerClickHandler
 
         int colorIndex = Random.Range(0, listColor.Count);
         srShape.color = listColor[colorIndex];
+    }
+
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
     }
 
     public void DoBug()

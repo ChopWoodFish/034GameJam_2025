@@ -704,6 +704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shapeManager: {fileID: 1791645728}
+  bottomWallTransform: {fileID: 1037177165}
 --- !u!4 &1349779369
 Transform:
   m_ObjectHideFlags: 0
