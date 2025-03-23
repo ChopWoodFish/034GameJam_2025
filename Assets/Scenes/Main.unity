@@ -522,6 +522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beatTipBox: {fileID: 2050834412}
   beatTipBoxAnimator: {fileID: 6098034362571325652}
+  beatSound: {fileID: 8300000, guid: 6b73a7554625a4a8fad6f92926e52fc0, type: 3}
 --- !u!4 &706796698
 Transform:
   m_ObjectHideFlags: 0

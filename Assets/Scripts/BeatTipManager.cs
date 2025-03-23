@@ -6,6 +6,7 @@ public class BeatTipManager : MonoBehaviour
 {
     [SerializeField] private Transform beatTipBox;
     [SerializeField] private Animator beatTipBoxAnimator;
+    [SerializeField] private AudioClip beatSound;
     
     private UpdateComp _updateComp;
     
@@ -33,5 +34,6 @@ public class BeatTipManager : MonoBehaviour
             beatTipBox.gameObject.SetActive(true);
         }
         beatTipBoxAnimator.Play("Beat", 0, 0);
+        IntEventSystem.Send(GameEventEnum.PlaySound, beatSound);
     }
 }

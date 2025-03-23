@@ -7,7 +7,8 @@ using Util;
 public class AudioManager : MonoBehaviour
 {
     // private AudioSource _audioSource;
-    private List<AudioSource> _listAudioSource = new List<AudioSource>();
+    private List<AudioSource> _listBgmAudioSource = new List<AudioSource>();
+    private AudioSource _effectAudioSource;
     
     
     private void Awake()
@@ -18,15 +19,28 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         InitStageBGM();
+        InitEffectAudio();
         IntEventSystem.Register(GameEventEnum.ChangeStage, OnChangeStage);
+        IntEventSystem.Register(GameEventEnum.PlaySound, OnPlaySound);
+    }
+
+    private void OnPlaySound(object param)
+    {
+        AudioClip ac = param as AudioClip;
+        _effectAudioSource.PlayOneShot(ac);
+    }
+
+    private void InitEffectAudio()
+    {
+        _effectAudioSource = this.AddComponent<AudioSource>();
     }
 
     private void OnChangeStage(object param)
     {
         int stage = (int) param;
-        for (int i = 0; i < _listAudioSource.Count; i++)
+        for (int i = 0; i < _listBgmAudioSource.Count; i++)
         {
-            var audioSource = _listAudioSource[i];
+            var audioSource = _listBgmAudioSource[i];
             audioSource.mute = i != stage;
         }
     }
@@ -41,7 +55,7 @@ public class AudioManager : MonoBehaviour
             audioSource.mute = true;
             audioSource.loop = true;
             audioSource.Play();
-            _listAudioSource.Add(audioSource);
+            _listBgmAudioSource.Add(audioSource);
         }
     }
 }

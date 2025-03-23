@@ -20,6 +20,7 @@ namespace Util
         GenerateScreenSaver = 10,
         ShowTuto = 11,
         CorrectClick = 12,
+        PlaySound = 13,
     }
 
     public static class IntEventSystem
