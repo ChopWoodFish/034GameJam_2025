@@ -57,7 +57,6 @@ public class GameManager : MonoBehaviour
         {
             if (_tutoStep == 2)
             {
-                IntEventSystem.Unregister(GameEventEnum.CorrectClick, OnCorrectClick);
                 _isInTuto = false;
                 _tutoStep = -1;   
             }
@@ -65,6 +64,10 @@ public class GameManager : MonoBehaviour
             {
                 _tutoStep++;
             }
+        }
+        else
+        {
+            _correctCount--;
         }
     }
 
@@ -133,7 +136,22 @@ public class GameManager : MonoBehaviour
         
         int type = listShapeType[Random.Range(0, listShapeType.Count)];
         currentShapeType = type;
+
+        if (_correctCount < 0)
+        {
+            _correctCount = 5;
+
+            _countOffset += Random.Range(1, 3);
+            _durOffset -= 0.05f;
+            
+            Debug.Log($"OneRoundData: update count offset: {_countOffset}, dur offset: {_durOffset}");
+        }
     }
+
+    private float _durOffset;
+    private float _minGenerateShapeDur = 0.1f;
+    private int _countOffset;
+    private int _correctCount = 5;  // 每正确点中5个加难度
     
     private void UpdateOneRoundTime()
     {
@@ -151,9 +169,10 @@ public class GameManager : MonoBehaviour
             count = 1;
             _listFixedShapeType.Clear();
             _listFixedShapeType.Add(currentShapeType);
+            _durOffset = 0f;
         }
 
-        generateShapeTotalTime = dur * (count - 1) + fadeDur + delay2;
+        generateShapeTotalTime = (dur + _durOffset) * (count + _countOffset - 1) + fadeDur + delay2;
         // Debug.Log($"One Round Time: {beatTipTotalTime}, {generateShapeTotalTime}");
     }
 
@@ -184,7 +203,7 @@ public class GameManager : MonoBehaviour
             _updateComp.ScheduleActionAndExecuteImmediately(() =>
             {
                 shapeManager.GenerateOneShape();
-            }, dur, count);
+            }, dur + _durOffset, count + _countOffset);
         }
     }
 
@@ -194,6 +213,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Game Over!");
             bottomWallTransform.gameObject.SetActive(false);
+            IntEventSystem.Send(GameEventEnum.ClearAllBug, null);
             _updateComp.DelayAction(RestartGame, 3f);
         }
         else
@@ -205,7 +225,9 @@ public class GameManager : MonoBehaviour
     private void RestartGame()
     {
         bottomWallTransform.gameObject.SetActive(true);
-        IntEventSystem.Send(GameEventEnum.ClearAllBug, null);
+        _durOffset = 0;
+        _countOffset = 0;
+        
         StartGame();
     }
 }
