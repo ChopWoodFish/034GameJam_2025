@@ -17,6 +17,7 @@ namespace Util
         CheckStage = 7,
         GenerateDeadPixel = 8,
         ClearAllBug = 9,
+        GenerateScreenSaver = 10,
     }
 
     public static class IntEventSystem

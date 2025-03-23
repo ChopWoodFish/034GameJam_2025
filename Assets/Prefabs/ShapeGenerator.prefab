@@ -59,3 +59,4 @@ MonoBehaviour:
   listLiquidParticleGameObject: []
   particleParent: {fileID: 0}
   deadPixelPrefab: {fileID: 2773421221540232524, guid: 0e182df49c6714db3967f26b31b73692, type: 3}
+  screenSaverPrefab: {fileID: 2773421221540232524, guid: 7332fd172f3a1458ea67d8ce80ad7147, type: 3}

@@ -18,6 +18,7 @@ public class ShapeGenerator : MonoBehaviour
     [SerializeField] private Transform particleParent;
 
     [SerializeField] private GameObject deadPixelPrefab;
+    [SerializeField] private GameObject screenSaverPrefab;
     
     private UpdateComp _updateComp;
     
@@ -27,6 +28,7 @@ public class ShapeGenerator : MonoBehaviour
         _updateComp = new UpdateComp();
         IntEventSystem.Register(GameEventEnum.GenerateShapeDebris, OnGenerateShapeDebris);
         IntEventSystem.Register(GameEventEnum.GenerateDeadPixel, OnGenerateDeadPixel);
+        IntEventSystem.Register(GameEventEnum.GenerateScreenSaver, OnGenerateScreenSaver);
         IntEventSystem.Register(GameEventEnum.ClearAllBug, OnClearAllBug);
     }
 
@@ -44,6 +46,15 @@ public class ShapeGenerator : MonoBehaviour
                 }
             }, delay);
             delay += 0.1f;
+        }
+    }
+
+    private void OnGenerateScreenSaver(object param)
+    {
+        if (param is Shape shape)
+        {
+            var genPos = shape.transform.position;
+            var screenSaver = Instantiate(screenSaverPrefab, genPos, Quaternion.identity, debrisParent);
         }
     }
 

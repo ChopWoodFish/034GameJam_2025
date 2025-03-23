@@ -49,12 +49,13 @@ public class Shape : MonoBehaviour, IPointerClickHandler
         {
             IntEventSystem.Send(GameEventEnum.GenerateDeadPixel, this);
         }
-        else
+        else if (type == 1)
         {
-            // if (type == 0)
-            // {
             IntEventSystem.Send(GameEventEnum.GenerateShapeDebris, this);
-            // }   
+        }
+        else if (type == 3)
+        {
+            IntEventSystem.Send(GameEventEnum.GenerateScreenSaver, this);
         }
     }
 
