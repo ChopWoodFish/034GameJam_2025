@@ -15,6 +15,8 @@ namespace Util
         GenerateShapeDebris = 5,
         ChangeStage = 6,
         CheckStage = 7,
+        GenerateDeadPixel = 8,
+        ClearAllBug = 9,
     }
 
     public static class IntEventSystem

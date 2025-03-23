@@ -16,6 +16,9 @@ public class ShapeGenerator : MonoBehaviour
     [SerializeField] private GameObject correctParticleGameObject;
     [SerializeField] private List<GameObject> listLiquidParticleGameObject;
     [SerializeField] private Transform particleParent;
+
+    [SerializeField] private GameObject deadPixelPrefab;
+    
     private UpdateComp _updateComp;
     
     
@@ -23,6 +26,34 @@ public class ShapeGenerator : MonoBehaviour
     {
         _updateComp = new UpdateComp();
         IntEventSystem.Register(GameEventEnum.GenerateShapeDebris, OnGenerateShapeDebris);
+        IntEventSystem.Register(GameEventEnum.GenerateDeadPixel, OnGenerateDeadPixel);
+        IntEventSystem.Register(GameEventEnum.ClearAllBug, OnClearAllBug);
+    }
+
+    private void OnClearAllBug(object _)
+    {
+        float delay = 0f;
+        for (int i = 0; i < debrisParent.childCount; i++)
+        {
+            var child = debrisParent.GetChild(i);
+            _updateComp.DelayAction(() =>
+            {
+                if (child != null)
+                {
+                    Destroy(child.gameObject);
+                }
+            }, delay);
+            delay += 0.1f;
+        }
+    }
+
+    private void OnGenerateDeadPixel(object param)
+    {
+        if (param is Shape shape)
+        {
+            var genPos = shape.transform.position;
+            var deadPixel = Instantiate(deadPixelPrefab, genPos, Quaternion.identity, debrisParent);
+        }
     }
 
     public Shape GenerateOneShape()

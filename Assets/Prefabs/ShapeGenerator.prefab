@@ -54,3 +54,8 @@ MonoBehaviour:
   - {fileID: 4936742621517556290, guid: ec8c82b128bc74e14ba06b8801092281, type: 3}
   - {fileID: 4958097118893466678, guid: f5a0a035f002648328ffb827dd7041ec, type: 3}
   debrisParent: {fileID: 0}
+  debrisParticleGameObject: {fileID: 0}
+  correctParticleGameObject: {fileID: 0}
+  listLiquidParticleGameObject: []
+  particleParent: {fileID: 0}
+  deadPixelPrefab: {fileID: 2773421221540232524, guid: 0e182df49c6714db3967f26b31b73692, type: 3}

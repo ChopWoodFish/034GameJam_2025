@@ -147,6 +147,7 @@ public class GameManager : MonoBehaviour
     private void RestartGame()
     {
         bottomWallTransform.gameObject.SetActive(true);
+        IntEventSystem.Send(GameEventEnum.ClearAllBug, null);
         StartGame();
     }
 }

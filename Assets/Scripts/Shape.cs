@@ -45,10 +45,17 @@ public class Shape : MonoBehaviour, IPointerClickHandler
 
     public void DoBug()
     {
-        // if (type == 0)
-        // {
+        if (type == 4)
+        {
+            IntEventSystem.Send(GameEventEnum.GenerateDeadPixel, this);
+        }
+        else
+        {
+            // if (type == 0)
+            // {
             IntEventSystem.Send(GameEventEnum.GenerateShapeDebris, this);
-        // }
+            // }   
+        }
     }
 
     public void AddForce(Vector2 force)
