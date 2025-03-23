@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8158586338830442240}
   - component: {fileID: 4840416683484099343}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ScreenSaver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 7261071255644021426}
   - component: {fileID: 2927644152125885162}
   - component: {fileID: 9053780219328423454}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 467c979cbb3e7457fbfe264ab310918f, type: 2}
   m_IncludeLayers:

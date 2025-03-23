@@ -14,7 +14,12 @@ public class ScreenSaver : MonoBehaviour
         var direction = Vector2FromAngle(UnityEngine.Random.Range(0, 360)).normalized;
         _rigidBody2d.velocity = direction * speed;
     }
-    
+
+    private void Update()
+    {
+        _rigidBody2d.velocity = _rigidBody2d.velocity.normalized * speed;
+    }
+
     private Vector2 Vector2FromAngle(float a)
     {
         a *= Mathf.Deg2Rad;
