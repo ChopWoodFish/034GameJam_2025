@@ -379,6 +379,7 @@ GameObject:
   - component: {fileID: 882055047}
   - component: {fileID: 882055050}
   - component: {fileID: 882055051}
+  - component: {fileID: 882055052}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -520,6 +521,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!114 &882055052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882055046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7aa526a98074855a45e588de78aac5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &998199155
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,7 +742,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1395478602}
-  - component: {fileID: 1395478601}
+  - component: {fileID: 1395478603}
   m_Layer: 0
   m_Name: Updater
   m_TagString: Untagged
@@ -737,18 +750,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1395478601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395478600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f19e5ff83f704ef9928a8aaac7d5e9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1395478602
 Transform:
   m_ObjectHideFlags: 0
@@ -764,6 +765,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1395478603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395478600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6efb9d5b25a3483e8e3931b2a43c95b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1511598305
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,7 +1065,15 @@ PrefabInstance:
     - target: {fileID: 5542502990214582482, guid: 48ccbcb5a4f41453faab68fef2a91f60, type: 3}
       propertyPath: debrisParent
       value: 
-      objectReference: {fileID: 1834939984}
+      objectReference: {fileID: 780952132}
+    - target: {fileID: 5542502990214582482, guid: 48ccbcb5a4f41453faab68fef2a91f60, type: 3}
+      propertyPath: debrisParticleGameObject
+      value: 
+      objectReference: {fileID: 863304164022633415, guid: e5c81bf555d92486ea8c9f6c15650c51, type: 3}
+    - target: {fileID: 5542502990214582482, guid: 48ccbcb5a4f41453faab68fef2a91f60, type: 3}
+      propertyPath: correctParticleGameObject
+      value: 
+      objectReference: {fileID: 863304164022633415, guid: 8e7936ef473a14256b16376431020230, type: 3}
     - target: {fileID: 5560980909327527722, guid: 48ccbcb5a4f41453faab68fef2a91f60, type: 3}
       propertyPath: m_Name
       value: ShapeGenerator

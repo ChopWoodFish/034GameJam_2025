@@ -23,7 +23,7 @@ public class BeatTipManager : MonoBehaviour
     private void OnShowBeatTip(object param)
     {
         int shapeType = (int) param;
-        _updateComp.ScheduleActionAndExecuteImmediately(ShowOneBeat, 0.7f, shapeType);
+        _updateComp.ScheduleActionAndExecuteImmediately(ShowOneBeat, 0.8f, shapeType);
     }
 
     private void ShowOneBeat()

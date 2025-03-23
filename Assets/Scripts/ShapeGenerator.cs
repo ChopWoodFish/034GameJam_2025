@@ -10,6 +10,8 @@ public class ShapeGenerator : MonoBehaviour
     [SerializeField] private Transform shapeParent;
     [SerializeField] private List<ShapeDebris> listShapeDebrisPrefab;
     [SerializeField] private Transform debrisParent;
+    [SerializeField] private GameObject debrisParticleGameObject;
+    [SerializeField] private GameObject correctParticleGameObject;
     private UpdateComp _updateComp;
     
     
@@ -29,6 +31,16 @@ public class ShapeGenerator : MonoBehaviour
         return newShape;
     }
 
+    public void GenerateCorrectParticle(Shape shape)
+    {
+        var pos = shape.transform.position;
+        var particle = Instantiate(correctParticleGameObject, pos, Quaternion.identity);
+        _updateComp.DelayAction(() =>
+        {
+            Destroy(particle);
+        }, 1f);
+    }
+
     private void OnGenerateShapeDebris(object param)
     {
         if (param is Shape shape)
@@ -37,6 +49,13 @@ public class ShapeGenerator : MonoBehaviour
             int maxCount = GameManager.Instance.SO.GetDataSettings().MaxGenerateDebrisCount;
             var listGenColor = GameManager.Instance.SO.GetDataSettings().listDebrisColor;
             var genPos = shape.transform.position;
+
+            var debrisParticle = Instantiate(debrisParticleGameObject, genPos, Quaternion.identity, debrisParent);
+            _updateComp.DelayAction(() =>
+            {
+                Destroy(debrisParticle);
+            }, 1f);
+            
             for (int i = 0; i < Random.Range(minCount, maxCount + 1); i++)
             {
                 int genType = Random.Range(0, listShapeDebrisPrefab.Count);

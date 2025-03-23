@@ -30,6 +30,7 @@ public class ShapeManager : MonoBehaviour
         {
             if (clickShape.Type == GameManager.Instance.CurrentShapeType)
             {
+                _shapeGenerator.GenerateCorrectParticle(clickShape);
                 DoRecycleShape(clickShape);
             }
             else
