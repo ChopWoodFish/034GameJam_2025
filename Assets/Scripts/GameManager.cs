@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Util;
 using Random = UnityEngine.Random;
@@ -20,6 +21,9 @@ public class GameManager : MonoBehaviour
     private float beatTipTotalTime;
     private float generateShapeTotalTime;
 
+    private int _currentStage;
+    private int _nextStage = -1;
+
 
     private void Awake()
     {
@@ -38,12 +42,47 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        IntEventSystem.Register(GameEventEnum.CheckStage, OnCheckStage);
+        
         _updateComp.DelayAction(StartGame, 2f);
     }
 
     private void StartGame()
     {
+        ChangeStage(0);
         StartOneRound();
+    }
+
+    private void OnCheckStage(object _)
+    {
+        if (_nextStage < 0)
+        {
+            Debug.Log($"check stage: {_nextStage}");
+        }
+        else
+        {
+            Debug.Log($"check stage: {_nextStage}, {shapeManager.DebrisCount}, {SO.GetDataSettings().bugStageCount[_nextStage]}");   
+        }
+        
+        if (_nextStage > 0 && shapeManager.DebrisCount > SO.GetDataSettings().bugStageCount[_nextStage])
+        {
+            ChangeStage(_nextStage);
+        }
+    }
+
+    private void ChangeStage(int newStage)
+    {
+        _currentStage = newStage;
+        if (_currentStage < SO.GetDataSettings().bugStageCount.Count - 1)
+        {
+            _nextStage = _currentStage + 1;
+        }
+        else
+        {
+            _nextStage = -1;
+        }
+        Debug.Log($"change stage to {_currentStage}, next: {_nextStage}");
+        IntEventSystem.Send(GameEventEnum.ChangeStage, _currentStage);
     }
 
     private int testIndex = 0;
@@ -93,7 +132,7 @@ public class GameManager : MonoBehaviour
 
     private void FinishOneRound()
     {
-        if (shapeManager.DebrisCount > SO.GetDataSettings().MaxDebrisCount)
+        if (shapeManager.DebrisCount > SO.GetDataSettings().bugStageCount.Last())
         {
             Debug.Log("Game Over!");
             bottomWallTransform.gameObject.SetActive(false);

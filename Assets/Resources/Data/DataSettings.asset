@@ -15,3 +15,19 @@ MonoBehaviour:
   listDebrisColor:
   - {r: 1, g: 0.9863347, b: 0, a: 1}
   - {r: 1, g: 0.088803485, b: 0, a: 1}
+  BeatStateDelay: 1
+  GenerateShapeDuration: 0.5
+  GenerateShapeCount: 8
+  ShapeFadeDuration: 2
+  GenerateStateDelay: 0.5
+  MinGenerateDebrisCount: 8
+  MaxGenerateDebrisCount: 12
+  MaxDebrisCount: 100
+  bugStageCount: 000000001400000024000000350000004400000054000000
+  bugStageBGM:
+  - {fileID: 8300000, guid: 58be6901e3a394810842acdc02a41f97, type: 3}
+  - {fileID: 8300000, guid: 081d23a55496144dd9bf28f9d996c0bb, type: 3}
+  - {fileID: 8300000, guid: d027c95afbe1c448f9e30a17d65f86ec, type: 3}
+  - {fileID: 8300000, guid: d5fc99fdb760f4f498d9fe57bc20bd56, type: 3}
+  - {fileID: 8300000, guid: d275535c4212e4c7fa3a07de7f36cc96, type: 3}
+  - {fileID: 8300000, guid: a1ac021b45c6042b1926cd143c213a1f, type: 3}

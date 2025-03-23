@@ -17,4 +17,6 @@ public class DataSettings : ScriptableObject
     public int MaxGenerateDebrisCount = 12;
     public int MaxDebrisCount = 50;
 
+    public List<int> bugStageCount;
+    public List<AudioClip> bugStageBGM;
 }

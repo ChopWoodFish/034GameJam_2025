@@ -13,6 +13,8 @@ namespace Util
         ClickShape = 3,
         RecycleShape = 4,
         GenerateShapeDebris = 5,
+        ChangeStage = 6,
+        CheckStage = 7,
     }
 
     public static class IntEventSystem

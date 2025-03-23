@@ -37,6 +37,7 @@ public class ShapeManager : MonoBehaviour
             {
                 clickShape.DoBug();
                 DoRecycleShape(clickShape);
+                IntEventSystem.Send(GameEventEnum.CheckStage, null);
             }
         }
     }
@@ -47,8 +48,8 @@ public class ShapeManager : MonoBehaviour
         {
             if (toRecycleShape.Type == GameManager.Instance.CurrentShapeType)
             {
-                Debug.Log($"miss shape {toRecycleShape.Type}");
                 toRecycleShape.DoBug();
+                IntEventSystem.Send(GameEventEnum.CheckStage, null);
             }
             DoRecycleShape(toRecycleShape);
         }
