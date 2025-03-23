@@ -1243,6 +1243,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shapeGenerator: {fileID: 2091826194}
+  bugSound: {fileID: 8300000, guid: 8c40f041ae7be43ed9d22dfccfb08de1, type: 3}
+  correctSound: {fileID: 8300000, guid: b29cb2e9aa7e84290a41ae081fabbcf8, type: 3}
 --- !u!4 &1791645729
 Transform:
   m_ObjectHideFlags: 0

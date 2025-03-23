@@ -7,6 +7,8 @@ public class ShapeManager : MonoBehaviour
     public int DebrisCount => _shapeGenerator.DebrisCount;
     
     [SerializeField] private ShapeGenerator _shapeGenerator;
+    [SerializeField] private AudioClip bugSound;
+    [SerializeField] private AudioClip correctSound;
     
     private List<Shape> listShape = new List<Shape>();
     
@@ -32,12 +34,14 @@ public class ShapeManager : MonoBehaviour
             {
                 _shapeGenerator.GenerateCorrectParticle(clickShape);
                 DoRecycleShape(clickShape);
+                IntEventSystem.Send(GameEventEnum.PlaySound, correctSound);
                 IntEventSystem.Send(GameEventEnum.CorrectClick, null);
             }
             else
             {
                 clickShape.DoBug();
                 DoRecycleShape(clickShape);
+                IntEventSystem.Send(GameEventEnum.PlaySound, bugSound);
                 IntEventSystem.Send(GameEventEnum.CheckStage, null);
             }
         }
@@ -50,6 +54,7 @@ public class ShapeManager : MonoBehaviour
             if (toRecycleShape.Type == GameManager.Instance.CurrentShapeType && !GameManager.Instance.IsInTuto)
             {
                 toRecycleShape.DoBug();
+                IntEventSystem.Send(GameEventEnum.PlaySound, bugSound);
                 IntEventSystem.Send(GameEventEnum.CheckStage, null);
             }
             DoRecycleShape(toRecycleShape);
