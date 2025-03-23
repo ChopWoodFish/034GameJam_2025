@@ -18,6 +18,8 @@ namespace Util
         GenerateDeadPixel = 8,
         ClearAllBug = 9,
         GenerateScreenSaver = 10,
+        ShowTuto = 11,
+        CorrectClick = 12,
     }
 
     public static class IntEventSystem

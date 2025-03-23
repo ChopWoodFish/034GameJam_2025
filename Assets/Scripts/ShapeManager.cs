@@ -17,9 +17,9 @@ public class ShapeManager : MonoBehaviour
         IntEventSystem.Register(GameEventEnum.RecycleShape, OnRecycleShape);
     }
 
-    public void GenerateOneShape()
+    public void GenerateOneShape(int genType = -1)
     {
-        var shape = _shapeGenerator.GenerateOneShape();
+        var shape = _shapeGenerator.GenerateOneShape(genType);
         shape.ShowFloating();
         listShape.Add(shape);
     }
@@ -32,6 +32,7 @@ public class ShapeManager : MonoBehaviour
             {
                 _shapeGenerator.GenerateCorrectParticle(clickShape);
                 DoRecycleShape(clickShape);
+                IntEventSystem.Send(GameEventEnum.CorrectClick, null);
             }
             else
             {
@@ -46,7 +47,7 @@ public class ShapeManager : MonoBehaviour
     {
         if (param is Shape toRecycleShape)
         {
-            if (toRecycleShape.Type == GameManager.Instance.CurrentShapeType)
+            if (toRecycleShape.Type == GameManager.Instance.CurrentShapeType && !GameManager.Instance.IsInTuto)
             {
                 toRecycleShape.DoBug();
                 IntEventSystem.Send(GameEventEnum.CheckStage, null);

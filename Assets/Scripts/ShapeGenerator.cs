@@ -32,6 +32,21 @@ public class ShapeGenerator : MonoBehaviour
         IntEventSystem.Register(GameEventEnum.ClearAllBug, OnClearAllBug);
     }
 
+    private Shape GetShapePrefabFromType(int shapeType)
+    {
+        if (shapeType == 1)
+        {
+            return listShapePrefab[0];
+        }
+
+        if (shapeType == 3)
+        {
+            return listShapePrefab[1];
+        }
+
+        return listShapePrefab[2];
+    }
+
     private void OnClearAllBug(object _)
     {
         float delay = 0f;
@@ -67,11 +82,21 @@ public class ShapeGenerator : MonoBehaviour
         }
     }
 
-    public Shape GenerateOneShape()
+    public Shape GenerateOneShape(int genType = -1)
     {
-        int genType = Random.Range(0, listShapePrefab.Count);
+        Shape shapePrefab = null;
+        if (genType == -1)
+        {
+            genType = Random.Range(0, listShapePrefab.Count);
+            shapePrefab = listShapePrefab[genType];
+        }
+        else
+        {
+            shapePrefab = GetShapePrefabFromType(genType);
+        }
+
         Vector2 genPos = new Vector2(Random.Range(-13f, 13f), Random.Range(-9f, 9f));
-        Shape newShape = Instantiate(listShapePrefab[genType],  genPos,
+        Shape newShape = Instantiate(shapePrefab,  genPos,
             Quaternion.Euler(0, 0, Random.Range(0f, 360f)) , shapeParent);
         // newShape.transform.localScale = Vector3.one;
         return newShape;

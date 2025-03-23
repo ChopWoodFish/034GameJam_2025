@@ -43,8 +43,29 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         IntEventSystem.Register(GameEventEnum.CheckStage, OnCheckStage);
+        IntEventSystem.Register(GameEventEnum.CorrectClick, OnCorrectClick);
+
+        _isInTuto = true;
+        _tutoStep = 0;
         
         _updateComp.DelayAction(StartGame, 2f);
+    }
+
+    private void OnCorrectClick(object _)
+    {
+        if (_isInTuto)
+        {
+            if (_tutoStep == 2)
+            {
+                IntEventSystem.Unregister(GameEventEnum.CorrectClick, OnCorrectClick);
+                _isInTuto = false;
+                _tutoStep = -1;   
+            }
+            else
+            {
+                _tutoStep++;
+            }
+        }
     }
 
     private void StartGame()
@@ -55,14 +76,14 @@ public class GameManager : MonoBehaviour
 
     private void OnCheckStage(object _)
     {
-        if (_nextStage < 0)
-        {
-            Debug.Log($"check stage: {_nextStage}");
-        }
-        else
-        {
-            Debug.Log($"check stage: {_nextStage}, {shapeManager.DebrisCount}, {SO.GetDataSettings().bugStageCount[_nextStage]}");   
-        }
+        // if (_nextStage < 0)
+        // {
+        //     Debug.Log($"check stage: {_nextStage}");
+        // }
+        // else
+        // {
+        //     Debug.Log($"check stage: {_nextStage}, {shapeManager.DebrisCount}, {SO.GetDataSettings().bugStageCount[_nextStage]}");   
+        // }
         
         if (_nextStage > 0 && shapeManager.DebrisCount > SO.GetDataSettings().bugStageCount[_nextStage])
         {
@@ -84,24 +105,39 @@ public class GameManager : MonoBehaviour
         Debug.Log($"change stage to {_currentStage}, next: {_nextStage}");
         IntEventSystem.Send(GameEventEnum.ChangeStage, _currentStage);
     }
-
-    private int testIndex = 0;
+    
     private void StartOneRound()
     {
-        List<int> listShapeType = new List<int>() {1, 3, 4};
-        int type = listShapeType[Random.Range(0, listShapeType.Count)];
-        // int type = listShapeType[testIndex];
-        currentShapeType = type;
-        testIndex = testIndex + 1 == listShapeType.Count ? 0 : testIndex + 1;
+        UpdateOneRoundData();
         UpdateOneRoundTime();
         
         ShowBeatTipState();
         _updateComp.DelayAction(GenerateShapeState, beatTipTotalTime);
         _updateComp.DelayAction(FinishOneRound, beatTipTotalTime + generateShapeTotalTime);
     }
+
+    public bool IsInTuto => _isInTuto;
+    private bool _isInTuto;
+    private int _tutoStep;
+    private List<int> _listFixedShapeType = new List<int>();
+
+    private void UpdateOneRoundData()
+    {
+        List<int> listShapeType = new List<int>() {1, 3, 4};
+        
+        if (_isInTuto)
+        {
+            currentShapeType = listShapeType[_tutoStep];
+            return;
+        }
+        
+        int type = listShapeType[Random.Range(0, listShapeType.Count)];
+        currentShapeType = type;
+    }
     
     private void UpdateOneRoundTime()
     {
+                
         float delay1 = SO.GetDataSettings().BeatStateDelay;
         
         beatTipTotalTime = currentShapeType + delay1;
@@ -110,8 +146,15 @@ public class GameManager : MonoBehaviour
         int count = SO.GetDataSettings().GenerateShapeCount;
         float fadeDur = SO.GetDataSettings().ShapeFadeDuration;
         float delay2 = SO.GetDataSettings().GenerateStateDelay;
+        if (_isInTuto)
+        {
+            count = 1;
+            _listFixedShapeType.Clear();
+            _listFixedShapeType.Add(currentShapeType);
+        }
+
         generateShapeTotalTime = dur * (count - 1) + fadeDur + delay2;
-        Debug.Log($"One Round Time: {beatTipTotalTime}, {generateShapeTotalTime}");
+        // Debug.Log($"One Round Time: {beatTipTotalTime}, {generateShapeTotalTime}");
     }
 
     private void ShowBeatTipState()
@@ -122,12 +165,27 @@ public class GameManager : MonoBehaviour
     private void GenerateShapeState()
     {
         float dur = SO.GetDataSettings().GenerateShapeDuration;
-        int count = SO.GetDataSettings().GenerateShapeCount;
-        float fadeDur = SO.GetDataSettings().ShapeFadeDuration;
-        _updateComp.ScheduleActionAndExecuteImmediately(() =>
+        if (_isInTuto)
         {
-            shapeManager.GenerateOneShape();
-        }, dur, count);
+            float delay = 0f;
+            for (int i = 0; i < _listFixedShapeType.Count; i++)
+            {
+                int genType = _listFixedShapeType[i];
+                _updateComp.DelayAction(() =>
+                {
+                    shapeManager.GenerateOneShape(genType);
+                }, delay);
+                delay += dur;
+            }
+        }
+        else
+        {
+            int count = SO.GetDataSettings().GenerateShapeCount;
+            _updateComp.ScheduleActionAndExecuteImmediately(() =>
+            {
+                shapeManager.GenerateOneShape();
+            }, dur, count);
+        }
     }
 
     private void FinishOneRound()
