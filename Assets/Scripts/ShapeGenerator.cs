@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Util;
+using Random = UnityEngine.Random;
 
 public class ShapeGenerator : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class ShapeGenerator : MonoBehaviour
     [SerializeField] private Transform debrisParent;
     [SerializeField] private GameObject debrisParticleGameObject;
     [SerializeField] private GameObject correctParticleGameObject;
+    [SerializeField] private List<GameObject> listLiquidParticleGameObject;
+    [SerializeField] private Transform particleParent;
     private UpdateComp _updateComp;
     
     
@@ -50,7 +54,18 @@ public class ShapeGenerator : MonoBehaviour
             var listGenColor = GameManager.Instance.SO.GetDataSettings().listDebrisColor;
             var genPos = shape.transform.position;
 
+            for (int i = 0; i < listLiquidParticleGameObject.Count; i++)
+            {
+                var liquidParticle = listLiquidParticleGameObject[i];
+                if (!liquidParticle.activeSelf)
+                {
+                    liquidParticle.transform.position = genPos;
+                    liquidParticle.SetActive(true);
+                    break;
+                }
+            }
             var debrisParticle = Instantiate(debrisParticleGameObject, genPos, Quaternion.identity, debrisParent);
+            
             _updateComp.DelayAction(() =>
             {
                 Destroy(debrisParticle);
