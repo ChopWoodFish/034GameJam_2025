@@ -522,7 +522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beatTipBox: {fileID: 2050834412}
   beatTipBoxAnimator: {fileID: 6098034362571325652}
-  beatSound: {fileID: 8300000, guid: 6b73a7554625a4a8fad6f92926e52fc0, type: 3}
+  beatSound: {fileID: 8300000, guid: 9ca6976b922e1475d9b7ecf5e86583db, type: 3}
 --- !u!4 &706796698
 Transform:
   m_ObjectHideFlags: 0
@@ -909,7 +909,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3593869045844899520, guid: f91c280f540414b77b18d4d3e0c82db5, type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5800632689801983791, guid: f91c280f540414b77b18d4d3e0c82db5, type: 3}
       propertyPath: m_Name
